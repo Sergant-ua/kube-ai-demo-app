@@ -1,0 +1,26 @@
+                                                                             
+    apiVersion: apps/v1                                                       
+    kind: Deployment                                                          
+    metadata:                                                                 
+      name: app-demo                                                          
+    spec:                                                                     
+      replicas: 1                                                             
+      selector:                                                               
+        matchLabels:                                                          
+          app: app-demo                                                       
+      template:                                                               
+        metadata:                                                             
+          labels:                                                             
+            app: app-demo                                                     
+        spec:                                                                 
+          containers:                                                         
+          - name: app-demo                                                    
+            image: your-image:latest                                          
+            ports:                                                            
+            - containerPort: 8080                                             
+            volumeMounts:                                                     
+            - mountPath: /data                                                
+              name: data-volume                                               
+          volumes:                                                            
+          - name: data-volume                                                 
+            emptyDir: {}   
