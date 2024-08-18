@@ -1,23 +1,23 @@
-    apiVersion: apps/v1                                                       
-    kind: Deployment                                                          
-    metadata:                                                                 
-      name: app-demo                                                          
-    spec:                                                                     
-      replicas: 1                                                             
-      selector:                                                               
-        matchLabels:                                                          
-          app: app-demo                                                       
-      template:                                                               
-        metadata:                                                             
-          labels:                                                             
-            app: app-demo                                                     
-        spec:                                                                 
-          containers:                                                         
-          - name: app-demo-container                                          
-            image: your-image:tag                                             
-            readinessProbe:                                                   
-              httpGet:                                                        
-                path: /health                                                 
-                port: 8080                                                    
-              initialDelaySeconds: 5                                          
-              periodSeconds: 10
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-demo
+  template:
+    metadata:
+      labels:
+        app: app-demo
+    spec:
+      containers:
+      - name: app-demo-container
+        image: your-image:tag
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
