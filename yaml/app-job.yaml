@@ -1,0 +1,21 @@
+   apiVersion: batch/v1                                                      
+    kind: Job                                                                 
+    metadata:                                                                 
+      name: append-timestamp-job                                              
+    spec:                                                                     
+      template:                                                               
+        spec:                                                                 
+          containers:                                                         
+          - name: append-timestamp                                            
+            image: busybox                                                    
+            command: ["sh", "-c", "date >> /mnt/volume/timestamp.txt"]        
+            volumeMounts:                                                     
+            - name: timestamp-volume                                          
+              mountPath: /mnt/volume                                          
+          restartPolicy: Never                                                
+          volumes:                                                            
+          - name: timestamp-volume                                            
+            hostPath:                                                         
+              path: /path/on/host                                             
+              type: Directory                                                 
+      backoffLimit: 4       
